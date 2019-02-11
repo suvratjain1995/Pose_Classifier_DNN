@@ -120,7 +120,15 @@ if __name__ == "__main__":
     notfight_train = postprocess_train_data(image_person)
     train_data = np.concatenate((fight_train,notfight_train),axis = 0)
     train_data = np.squeeze(train_data,axis = 1)
+    fight_size = fight_train.shape[0]
+    notfight_size = notfight_train.shape[0]
+    print(fight_size,notfight_size)
+    train_y = np.zeros((train_data.shape[0],1))
+    train_y[0:fight_size] = 1.0
     print(train_data)
+    print(train_y)
     with open("train_data.pickle","wb") as f:
         pickle.dump(train_data,f)
+    with open("train_data_y.pickle","wb") as f:
+        pickle.dump(train_y,f)
 
