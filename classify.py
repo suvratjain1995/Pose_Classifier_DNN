@@ -15,7 +15,11 @@ limbSeq = [[2, 3], [2, 6], [3, 4], [4, 5], [6, 7], [7, 8], [2, 9], [9, 10], \
            [10, 11], [2, 12], [12, 13], [13, 14], [2, 1], [1, 15], [15, 17], \
            [1, 16], [16, 18], [3, 17], [6, 18]]
 
-
+def normalize_cord(image,X,Y):
+  h,w,_  = image.shape
+  x = [X[0]/w,X[1]/w]
+  y = [Y[0]/h,Y[1]/h]
+  return x,y
 def create_model():
   model = Sequential()
   model.add(Dense(120, input_dim=(136), kernel_initializer='normal', activation='relu'))
