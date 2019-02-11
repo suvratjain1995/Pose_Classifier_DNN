@@ -38,13 +38,25 @@ def get_images(pickle_path):
         count+=1
     
 
-
+limbSeq = [[2, 3], [2, 6], [3, 4], [4, 5], [6, 7], [7, 8], [2, 9], [9, 10], \
+           [10, 11], [2, 12], [12, 13], [13, 14], [2, 1], [1, 15], [15, 17], \
+           [1, 16], [16, 18], [3, 17], [6, 18]]
 def train_data_measurement(train_Data_path):
     with open("value.pickle","rb") as f:
         test = pickle.load(f)
-
+    import numpy as np
     for t in test:
-        print(t[0],t[1].shape)
+        print(t[0],t[1][1].shape,t[1][0].shape)
+        subset = t[1][0]
+        candidate = t[1][1]
+        for i in range(17):
+            for n in range(len(subset)):
+                index = subset[n][np.array(limbSeq[i]) - 1]
+                if -1 in index:
+                    continue
+                Y = candidate[index.astype(int), 0]
+                X = candidate[index.astype(int), 1]
+                print(X,Y)
 
 
 if __name__ == "__main__":
@@ -54,5 +66,5 @@ if __name__ == "__main__":
     load_m(None)
     params, model_params = config_reader()
     get_training_data_("sample_images/",params,model_params)
-    # get_images(None)
-    # train_data_measurement(None)
+    get_images(None)
+    train_data_measurement(None)
