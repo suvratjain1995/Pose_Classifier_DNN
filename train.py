@@ -19,7 +19,7 @@ def get_training_data_(dir_path,params,model_params):
         h,w,_= train_image.shape
         canvas,subset = process(os.path.join(dir_path,f),params,model_params,series = True)
         cv2.imwrite("output_images"+str(count)+".jpg",canvas)
-        train_temp = {f,subset}
+        train_temp = {f,list(subset)}
         train_data.append(train_temp)
 
     with open("value.json","wb") as f:
