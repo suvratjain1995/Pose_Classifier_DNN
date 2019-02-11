@@ -21,11 +21,12 @@ def get_training_data_(dir_path,params,model_params):
         cv2.imwrite("output_images/output"+str(count)+".jpg",canvas)
         temp_tup = (f,subset)
         train_data.append(temp_tup)
+        with open("value.pickle","w") as f:
+            pickle.dump(train_data,f)
+        
         count+=1
 
-    with open("value.pickle","w") as f:
-        picke.dump(train_data,f)
-        
+    
 
 
 
