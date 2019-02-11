@@ -113,9 +113,9 @@ class ActionClassifier:
                     else:
                         result = np.concatenate((result,value),axis = 1)
 
-                    print(result.shape)
+                    # print(result.shape)
                     train_.append(result)
-        print(train_)
+        # print(train_)
         # train_ = np.ndarray(train_)
         train_ = np.asarray(train_)
         train_ = np.squeeze(train_,axis= 1)
@@ -131,6 +131,7 @@ class ActionClassifier:
             temp_ = train_[i]
             temp_ = np.expand_dims(temp_,axis = 0)
             result = ActionClassifier.model.predict(temp_)
+            print("result",result)
             if(result[0] >= 1):
                 fight_flag+=1
             else:
