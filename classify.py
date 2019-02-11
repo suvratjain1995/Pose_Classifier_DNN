@@ -54,7 +54,7 @@ class ActionClassifier:
         ActionClassifier.load_model(model_path)
 
 
-    def getImageVector(image):
+    def getImageVector(self,image):
         train_ = []
         params,model_params = config_reader()
         canvas,subset,candidate = process(image,params,model_params,series = True,model_call = True)
@@ -107,8 +107,8 @@ class ActionClassifier:
                     
 
 
-    def classify(image):
-        train_ = getImageVector(image)
+    def classify(self,image):
+        train_ = self.getImageVector(image)
         fight_flag = 0
         notfight_flag = 0
         for i in range(len(train_)):
