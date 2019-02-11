@@ -21,7 +21,7 @@ def get_training_data_(dir_path,params,model_params):
         cv2.imwrite("output_images/output"+str(count)+".jpg",canvas)
         temp_tup = (f,(subset,candidate))
         train_data.append(temp_tup)
-        with open("value.pickle","wb") as f:
+        with open("value2.pickle","wb") as f:
             pickle.dump(train_data,f)
         
         count+=1
@@ -29,12 +29,12 @@ def get_training_data_(dir_path,params,model_params):
     
 
 def get_images(pickle_path):
-    with open("images.pickle","rb") as f:
+    with open("images2.pickle","rb") as f:
         test = pickle.load(f)
     count = 0
     for t in test:
         print(t.shape)
-        cv2.imwrite("output_images/output"+str(count)+".jpg",t)
+        cv2.imwrite("output_images/output2"+str(count)+".jpg",t)
         count+=1
     
 
@@ -42,7 +42,7 @@ limbSeq = [[2, 3], [2, 6], [3, 4], [4, 5], [6, 7], [7, 8], [2, 9], [9, 10], \
            [10, 11], [2, 12], [12, 13], [13, 14], [2, 1], [1, 15], [15, 17], \
            [1, 16], [16, 18], [3, 17], [6, 18]]
 def train_data_measurement(train_Data_path):
-    with open("value.pickle","rb") as f:
+    with open("value2.pickle","rb") as f:
         test = pickle.load(f)
     import numpy as np
     for t in test:
@@ -65,6 +65,6 @@ if __name__ == "__main__":
     # model.load_weights(keras_weights_file)
     load_m(None)
     params, model_params = config_reader()
-    get_training_data_("sample_images/",params,model_params)
+    get_training_data_("sample_images/notfight",params,model_params)
     get_images(None)
     train_data_measurement(None)
