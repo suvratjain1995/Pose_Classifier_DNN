@@ -115,7 +115,7 @@ if __name__ == "__main__":
     # get_images(None)
     image_person = train_data_measurement(fight_pickle)
     fight_train  = postprocess_train_data(image_person)
-    get_training_data_(notfight_path,params,model_params,notfight_pickle)
+    # get_training_data_(notfight_path,params,model_params,notfight_pickle)
     image_person = train_data_measurement(notfight_path)
     notfight_train = postprocess_train_data(image_person)
     train_data = np.concatenate((fight_train,notfight_train),axis = 0)
