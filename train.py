@@ -86,9 +86,9 @@ def postprocess_train_data(image_person):
             zero_  = np.zeros((1,68-size))
             value = np.concatenate((value,zero_),axis = 1)
             if result.size == 0 :
-            result = value
+                result = value
             else:
-            result = np.concatenate((result,value),axis = 1)
+                result = np.concatenate((result,value),axis = 1)
         #   print(value,value.shape)
         train_.append(result)
     return np.asarray(train_)
