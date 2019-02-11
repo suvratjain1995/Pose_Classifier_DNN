@@ -34,7 +34,7 @@ def load_train_data(train_data_path,train_data_path_y):
 def fit_model():
     model = create_model()
     train_data ,train_y_data = load_train_data("train_data.pickle","train_data_y.pickle")
-    model.fit(train_data,train_y_data,batch_size=4,epochs= 100,verbose= 0,shuffle= True)
+    model.fit(train_data,train_y_data,batch_size=1,epochs= 100,shuffle= True)
 
     with open("model.pickle","wb") as f:
         pickle.dump(model,f)
