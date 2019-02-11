@@ -66,6 +66,7 @@ class ActionClassifier:
 
     def getImageVector(self,image):
         train_ = []
+        temp = np.copy(image)
         params,model_params = config_reader()
         canvas,subset,candidate = process(image,params,model_params,series = True,model_call = True)
         person_points = []
