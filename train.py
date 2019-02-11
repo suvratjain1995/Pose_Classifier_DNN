@@ -26,7 +26,7 @@ def get_training_data_(dir_path,params,model_params,output_pickle_file):
         # print(os.path.join(dir_path,f))
         h,w,_= train_image.shape
         canvas,subset,candidate = process(f,params,model_params,series = True)
-        cv2.imwrite("output_images/output_"+f.split("/")[1],canvas)
+        cv2.imwrite("output_images/output_"+f.split("/")[2],canvas)
         temp_tup = (f,(subset,candidate))
         train_data.append(temp_tup)
         with open(output_pickle_file,"wb") as f:
