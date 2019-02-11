@@ -211,9 +211,9 @@ def process (input_image, params, model_params,series = False):
     subset = np.delete(subset, deleteIdx, axis=0)
 
     canvas = cv2.imread(input_image)  # B,G,R order
-    for i in range(18):
-        for j in range(len(all_peaks[i])):
-            cv2.circle(canvas, all_peaks[i][j][0:2], 4, colors[i], thickness=-1)
+    # for i in range(18):
+    #     for j in range(len(all_peaks[i])):
+    #         cv2.circle(canvas, all_peaks[i][j][0:2], 4, colors[i], thickness=-1)
 
     stickwidth = 4
 
