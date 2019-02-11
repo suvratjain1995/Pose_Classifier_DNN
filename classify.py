@@ -111,9 +111,11 @@ class ActionClassifier:
                         result = value
                     else:
                         result = np.concatenate((result,value),axis = 1)
+
+                    print(result.shape)
                     train_.append(result)
         print(train_)
-        train_ = np.ndarray(train_)
+        # train_ = np.ndarray(train_)
         # train_ = np.asarray(train_)
         train_ = np.squeeze(train_,axis= 1)
         return train_
