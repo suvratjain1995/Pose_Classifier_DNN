@@ -23,7 +23,7 @@ def get_training_data_(dir_path,params,model_params):
         train_data.append(train_temp)
         count+=1
 
-    with open("value.json","wb") as f:
+    with open("value.json","w") as f:
         json.dump(train_data,f)
         
 
