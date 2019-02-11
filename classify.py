@@ -135,4 +135,11 @@ class ActionClassifier:
 # results = cross_val_score(pipeline, train_data, train_y_data, cv=kfold)
 # print("Smaller: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
 
-fit_model()
+# fit_model()
+import cv2
+import glob
+ac = ActionClassifier()
+test_file = glob.glob("sample_images/TestImages/*.jpg")
+for test in test_file:
+    test1 = cv2.imread(test)
+    print(ac.classify(test1))
