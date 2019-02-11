@@ -6,6 +6,13 @@ import json
 import cv2
 import pickle
 import glob
+
+def normalize_cord(image,X,Y):
+  h,w,_  = image.shape
+  x = [X[0]/w,X[1]/w]
+  y = [Y[0]/h,Y[1]/h]
+  return x,y
+
 def get_training_data_(dir_path,params,model_params,output_pickle_file):
     if not os.path.exists("./output_images"):
         os.mkdir("output_images")
@@ -104,7 +111,7 @@ if __name__ == "__main__":
     notfight_path = "sample_images/notfight"
     fight_pickle = "fight.pickle"
     notfight_pickle = "notfight.pickle"
-    get_training_data_(fight_path,params,model_params,fight_pickle)
+    # get_training_data_(fight_path,params,model_params,fight_pickle)
     # get_images(None)
     image_person = train_data_measurement(fight_pickle)
     fight_train  = postprocess_train_data(image_person)
