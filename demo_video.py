@@ -34,7 +34,7 @@ colors = [[255, 0, 0], [255, 85, 0], [255, 170, 0], [255, 255, 0], [170, 255, 0]
           [170, 0, 255], [255, 0, 255], [255, 0, 170], [255, 0, 85]]
 
 
-def process (input_image, params, model_params):
+def process (input_image, params, model_params,series = False):
 
     oriImg = cv2.cvtColor(input_image, cv2.COLOR_RGB2BGR)
 
@@ -235,8 +235,6 @@ def process (input_image, params, model_params):
                                        360, 1)
             cv2.fillConvexPoly(cur_canvas, polygon, colors[i])
             canvas = cv2.addWeighted(canvas, 0.4, cur_canvas, 0.6, 0)
-
-    return canvas
 
 
 if __name__ == '__main__':

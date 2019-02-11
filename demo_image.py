@@ -30,8 +30,15 @@ colors = [[255, 0, 0], [255, 85, 0], [255, 170, 0], [255, 255, 0], [170, 255, 0]
           [170, 0, 255], [255, 0, 255], [255, 0, 170], [255, 0, 85]]
 
 
-def process (input_image, params, model_params):
+model  = None
+def load_m(model_path):
+    keras_weights_file = "model.h5"
+    global model
+    model = get_testing_model()
+    model.load_weights(keras_weights_file)
 
+def process (input_image, params, model_params,series = False):
+    global model
     oriImg = cv2.imread(input_image)  # B,G,R order
     multiplier = [x * model_params['boxsize'] / oriImg.shape[0] for x in params['scale_search']]
 
@@ -227,7 +234,10 @@ def process (input_image, params, model_params):
             cv2.fillConvexPoly(cur_canvas, polygon, colors[i])
             canvas = cv2.addWeighted(canvas, 0.4, cur_canvas, 0.6, 0)
 
-    return canvas
+    if series:
+        return canvas,subset
+    else:
+        return canvas
 
 
 if __name__ == '__main__':
