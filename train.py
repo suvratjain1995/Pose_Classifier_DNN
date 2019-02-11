@@ -17,9 +17,9 @@ def get_training_data_(dir_path,params,model_params):
         train_image = cv2.imread(os.path.join(dir_path,f))
         print(os.path.join(dir_path,f))
         h,w,_= train_image.shape
-        canvas,subset = process(os.path.join(dir_path,f),params,model_params,series = True)
+        canvas,subset,candidate = process(os.path.join(dir_path,f),params,model_params,series = True)
         cv2.imwrite("output_images/output"+str(count)+".jpg",canvas)
-        temp_tup = (f,subset)
+        temp_tup = (f,(subset,candidate))
         train_data.append(temp_tup)
         with open("value.pickle","wb") as f:
             pickle.dump(train_data,f)
@@ -28,6 +28,23 @@ def get_training_data_(dir_path,params,model_params):
 
     
 
+def get_images(pickle_path):
+    with open("images.pickle","rb") as f:
+        test = pickle.load(f)
+    count = 0
+    for t in test:
+        print(t.shape)
+        cv2.imwrite("output_images/output"+str(count)+".jpg",t)
+        count+=1
+    
+
+
+def train_data_measurement(train_Data_path):
+    with open("value.pickle","rb") as f:
+        test = pickle.load(f)
+
+    for t in test:
+        print(t[0],t[1].shape)
 
 
 if __name__ == "__main__":
@@ -37,3 +54,5 @@ if __name__ == "__main__":
     load_m(None)
     params, model_params = config_reader()
     get_training_data_("sample_images/",params,model_params)
+    # get_images(None)
+    # train_data_measurement(None)

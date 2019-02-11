@@ -235,7 +235,7 @@ def process (input_image, params, model_params,series = False):
             canvas = cv2.addWeighted(canvas, 0.4, cur_canvas, 0.6, 0)
 
     if series:
-        return canvas,subset
+        return canvas,subset,candidate
     else:
         return canvas
 
