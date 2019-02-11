@@ -19,7 +19,7 @@ def get_training_data_(dir_path,params,model_params):
         h,w,_= train_image.shape
         canvas,subset = process(os.path.join(dir_path,f),params,model_params,series = True)
         cv2.imwrite("output_images/output"+str(count)+".jpg",canvas)
-        temp_tup = (j,subset)
+        temp_tup = (f,subset)
         train_data.append(temp_tup)
         count+=1
 
