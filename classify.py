@@ -14,6 +14,8 @@ def create_smaller():
   model.add(Dense(1,input_dim = (60), kernel_initializer='normal', activation='sigmoid'))
   model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
   return model
+seed = 7
+np.random.seed(seed)
 
 def load_train_data(train_data_path,train_data_path_y):
     with open(train_data_path,"rb") as f:
