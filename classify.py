@@ -7,6 +7,7 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 import pickle
+import numpy as np
 def create_smaller():
   model = Sequential()
   model.add(Dense(120, input_dim=(136), kernel_initializer='normal', activation='relu'))
