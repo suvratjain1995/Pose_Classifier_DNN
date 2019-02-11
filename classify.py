@@ -94,6 +94,7 @@ class ActionClassifier:
             for i in range(len(person_points)):
                 result = np.array([])
                 for j in range(i+1,len(person_points)):
+                    result  = np.array([])
                     value = np.expand_dims(np.ndarray.flatten(np.asarray(person_points[i])),axis = 0)
                     size = value.shape[1]
                     zero_  = np.zeros((1,68-size))
@@ -115,7 +116,7 @@ class ActionClassifier:
                     print(result.shape)
                     train_.append(result)
         print(train_)
-        # train_ = np.ndarray(train_)
+        train_ = np.ndarray(train_)
         # train_ = np.asarray(train_)
         train_ = np.squeeze(train_,axis= 1)
         return train_
