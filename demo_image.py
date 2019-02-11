@@ -37,9 +37,14 @@ def load_m(model_path):
     model = get_testing_model()
     model.load_weights(keras_weights_file)
 
-def process (input_image, params, model_params,series = False):
+def process (input_image, params, model_params,series = False,model_call = False):
     global model
-    oriImg = cv2.imread(input_image)  # B,G,R order
+    oriImg = None
+    if not model_call:
+        oriImg = cv2.imread(input_image)
+    else:
+        oriImg = np.copy(input_image)
+          # B,G,R order
     multiplier = [x * model_params['boxsize'] / oriImg.shape[0] for x in params['scale_search']]
 
     heatmap_avg = np.zeros((oriImg.shape[0], oriImg.shape[1], 19))
@@ -210,7 +215,11 @@ def process (input_image, params, model_params,series = False):
             deleteIdx.append(i)
     subset = np.delete(subset, deleteIdx, axis=0)
 
-    canvas = cv2.imread(input_image)  # B,G,R order
+    if not model_call:
+        canvas = cv2.imread(input_image)
+    else:
+        canvas = np.copy(input_image)
+         # B,G,R order
     # for i in range(18):
     #     for j in range(len(all_peaks[i])):
     #         cv2.circle(canvas, all_peaks[i][j][0:2], 4, colors[i], thickness=-1)
