@@ -10,7 +10,7 @@ from config_reader import config_reader
 import pickle
 import numpy as np
 from demo_image import process,load_m
-
+import cv2
 limbSeq = [[2, 3], [2, 6], [3, 4], [4, 5], [6, 7], [7, 8], [2, 9], [9, 10], \
            [10, 11], [2, 12], [12, 13], [13, 14], [2, 1], [1, 15], [15, 17], \
            [1, 16], [16, 18], [3, 17], [6, 18]]
@@ -69,6 +69,7 @@ class ActionClassifier:
         temp = np.copy(image)
         params,model_params = config_reader()
         canvas,subset,candidate = process(image,params,model_params,series = True,model_call = True)
+        cv2.imwrite("Result.jpg",canvas)
         person_points = []
         for n in range(len(subset)):
             temp_person = []
@@ -132,7 +133,7 @@ class ActionClassifier:
             temp_ = np.expand_dims(temp_,axis = 0)
             result = ActionClassifier.model.predict(temp_)
             print("result",result)
-            if(result[0] >= 1):
+            if(result[0] >= 0.90):
                 fight_flag+=1
             else:
                 notfight_flag+=1
@@ -153,7 +154,6 @@ class ActionClassifier:
 # print("Smaller: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
 
 # fit_model()
-import cv2
 import glob
 ac = ActionClassifier()
 test_file = glob.glob("sample_images/TestImages/*.jpg")
