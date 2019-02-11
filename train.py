@@ -6,7 +6,7 @@ import json
 import cv2
 import pickle
 import glob
-
+import numpy as np
 def normalize_cord(image,X,Y):
   h,w,_  = image.shape
   x = [X[0]/w,X[1]/w]
