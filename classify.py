@@ -126,13 +126,13 @@ class ActionClassifier:
             return "notfight" 
 
 
-estimators = []
-# estimators.append(('standardize', StandardScaler()))
-estimators.append(('mlp', KerasClassifier(build_fn=create_model, epochs=100, batch_size=4, verbose=0)))
-pipeline = Pipeline(estimators)
-train_data ,train_y_data = load_train_data("train_data.pickle","train_data_y.pickle")
-kfold = StratifiedKFold(n_splits=5, shuffle=True, random_state=seed)
-results = cross_val_score(pipeline, train_data, train_y_data, cv=kfold)
-print("Smaller: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
+# estimators = []
+# # estimators.append(('standardize', StandardScaler()))
+# estimators.append(('mlp', KerasClassifier(build_fn=create_model, epochs=100, batch_size=4, verbose=0)))
+# pipeline = Pipeline(estimators)
+# train_data ,train_y_data = load_train_data("train_data.pickle","train_data_y.pickle")
+# kfold = StratifiedKFold(n_splits=5, shuffle=True, random_state=seed)
+# results = cross_val_score(pipeline, train_data, train_y_data, cv=kfold)
+# print("Smaller: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
 
 fit_model()
