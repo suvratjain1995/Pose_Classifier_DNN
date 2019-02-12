@@ -55,6 +55,11 @@ image  = cv2.imread(<<image_path>>)
 result_tag,result_image = cal.classify(image)
 ```
 
+## Recreate result:
+
+1. Run train.py
+
+2. Run classify.py
 
 ## Related repository
 - CVPR'16, [Convolutional Pose Machines](https://github.com/shihenw/convolutional-pose-machines-release).
