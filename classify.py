@@ -155,11 +155,19 @@ class ActionClassifier:
                 fight_flag+=1
             else:
                 notfight_flag+=1
-
-        if fight_flag > notfight_flag:
-            return "fight"
+        
+        if fight_flag >= 1:
+            temp = np.copy(image)
+            font = cv2.FONT_HERSHEY_SIMPLEX
+            cv2.putText(temp,'Fight',(10,10), font, 4,(255,255,255),2,cv2.LINE_AA)
+            print("fight")
+            return "fight",temp
         else:
-            return "notfight" 
+            temp = np.copy(image)
+            font = cv2.FONT_HERSHEY_SIMPLEX
+            cv2.putText(temp,'NotFight',(10,10), font, 4,(255,255,255),2,cv2.LINE_AA)
+            print("notfight")
+            return "notfight",temp
 
 """
 
@@ -188,4 +196,5 @@ ac = ActionClassifier()
 test_file = glob.glob("sample_images/TestImages/*.jpg")
 for test in test_file:
     test1 = cv2.imread(test)
-    print(ac.classify(test1))
+    result,result_image = ac.classify(test1)
+    cv2.imwrite("result_"+test,result_image)
