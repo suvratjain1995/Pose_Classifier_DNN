@@ -11,6 +11,8 @@ import pickle
 import numpy as np
 from demo_image import process,load_m
 import cv2
+import sys
+import argparse
 limbSeq = [[2, 3], [2, 6], [3, 4], [4, 5], [6, 7], [7, 8], [2, 9], [9, 10], \
            [10, 11], [2, 12], [12, 13], [13, 14], [2, 1], [1, 15], [15, 17], \
            [1, 16], [16, 18], [3, 17], [6, 18]]
@@ -169,33 +171,44 @@ class ActionClassifier:
             print("notfight")
             return "notfight",temp
 
-"""
 
-Check the performance of the model using CrossValidation
+if __name__ == "__main__":
 
-"""
-estimators = []
-# estimators.append(('standardize', StandardScaler()))
-estimators.append(('mlp', KerasClassifier(build_fn=create_model, epochs=100, batch_size=4, verbose=0)))
-pipeline = Pipeline(estimators)
-train_data ,train_y_data = load_train_data("train_data.pickle","train_data_y.pickle")
-kfold = StratifiedKFold(n_splits=5, shuffle=True, random_state=seed)
-results = cross_val_score(pipeline, train_data, train_y_data, cv=kfold)
-print("Smaller: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
+    parser = argparse.ArgumentParser()
+    parser.add_argument('cross_val', default = "false",help="CrossValidate")
+    parser.add_argument('fit', default = "false", help="Fit Train Data")
+    args = parser.parse_args()
 
 
-"""
-Train model on the train_data and train_y_data
-"""
-fit_model()
-import glob
-"""
-Test Model on the sampleimages/TestImages/*.jpg
-"""
-ac = ActionClassifier()
-test_file = glob.glob("sample_images/TestImages/*.jpg")
-for test in test_file:
-    test1 = cv2.imread(test)
-    result,result_image = ac.classify(test1)
-    file_name = test.split("/")[2]
-    cv2.imwrite("result_"+file_name,result_image)
+    if args.cross_val == "true":
+        """
+
+        Check the performance of the model using CrossValidation
+
+        """
+        estimators = []
+        # estimators.append(('standardize', StandardScaler()))
+        estimators.append(('mlp', KerasClassifier(build_fn=create_model, epochs=100, batch_size=4, verbose=0)))
+        pipeline = Pipeline(estimators)
+        train_data ,train_y_data = load_train_data("train_data.pickle","train_data_y.pickle")
+        kfold = StratifiedKFold(n_splits=5, shuffle=True, random_state=seed)
+        results = cross_val_score(pipeline, train_data, train_y_data, cv=kfold)
+        print("Smaller: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
+
+
+    """
+    Train model on the train_data and train_y_data
+    """
+    if args.fit_model == "true":
+        fit_model()
+    import glob
+    """
+    Test Model on the sampleimages/TestImages/*.jpg
+    """
+    ac = ActionClassifier()
+    test_file = glob.glob("sample_images/TestImages/*.jpg")
+    for test in test_file:
+        test1 = cv2.imread(test)
+        result,result_image = ac.classify(test1)
+        file_name = test.split("/")[2]
+        cv2.imwrite("result_"+file_name,result_image)
