@@ -132,7 +132,7 @@ if __name__ == "__main__":
     notfight_path = "sample_images/notfight"
     fight_pickle = "fight.pickle"
     notfight_pickle = "notfight.pickle"
-    get_training_data_(fight_path,params,model_params,fight_pickle)
+    # get_training_data_(fight_path,params,model_params,fight_pickle)
     # get_images(None)
     image_person = train_data_measurement(fight_pickle)
     fight_train  = postprocess_train_data(image_person)
