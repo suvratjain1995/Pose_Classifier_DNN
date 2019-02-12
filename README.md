@@ -57,9 +57,11 @@ result_tag,result_image = cal.classify(image)
 
 ## Recreate result:
 
-1. Run train.py
+1. Download pose estimation pretrained model :- https://www.dropbox.com/s/llpxd14is7gyj0z/model.h5
 
-2. Run classify.py
+2. Run train.py
+
+3. Run classify.py
 
 ## Related repository
 - CVPR'16, [Convolutional Pose Machines](https://github.com/shihenw/convolutional-pose-machines-release).
