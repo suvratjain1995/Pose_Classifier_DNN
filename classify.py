@@ -20,6 +20,11 @@ def normalize_cord(image,X,Y):
   x = [X[0]/w,X[1]/w]
   y = [Y[0]/h,Y[1]/h]
   return x,y
+
+"""
+Create_model()
+Return's model created 
+"""
 def create_model():
   model = Sequential()
   model.add(Dense(120, input_dim=(136), kernel_initializer='normal', activation='relu'))
@@ -30,6 +35,10 @@ def create_model():
 seed = 7
 np.random.seed(seed)
 
+
+"""
+Load train Data
+"""
 def load_train_data(train_data_path,train_data_path_y):
     with open(train_data_path,"rb") as f:
         train_ = pickle.load(f)
@@ -40,7 +49,9 @@ def load_train_data(train_data_path,train_data_path_y):
     return train_,train_y
 
 
-
+"""
+Fit Model to the train data, pickles the model after training
+"""
 def fit_model():
     model = create_model()
     train_data ,train_y_data = load_train_data("train_data.pickle","train_data_y.pickle")
@@ -50,7 +61,14 @@ def fit_model():
         pickle.dump(model,f)
     return model
 
+"""
+Class ActionClassifier
 
+Load's model and then using pose estimation model, estimates the pose of the people on the scene. 
+Using the pose , create the vector of the image for query (vector is normalized pose points)
+using the vector, querys the trained model to predict the result. 
+
+"""
 
 class ActionClassifier:
     model = None
@@ -143,18 +161,29 @@ class ActionClassifier:
         else:
             return "notfight" 
 
+"""
 
-# estimators = []
-# # estimators.append(('standardize', StandardScaler()))
-# estimators.append(('mlp', KerasClassifier(build_fn=create_model, epochs=100, batch_size=4, verbose=0)))
-# pipeline = Pipeline(estimators)
-# train_data ,train_y_data = load_train_data("train_data.pickle","train_data_y.pickle")
-# kfold = StratifiedKFold(n_splits=5, shuffle=True, random_state=seed)
-# results = cross_val_score(pipeline, train_data, train_y_data, cv=kfold)
-# print("Smaller: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
+Check the performance of the model using CrossValidation
 
-# fit_model()
+"""
+estimators = []
+# estimators.append(('standardize', StandardScaler()))
+estimators.append(('mlp', KerasClassifier(build_fn=create_model, epochs=100, batch_size=4, verbose=0)))
+pipeline = Pipeline(estimators)
+train_data ,train_y_data = load_train_data("train_data.pickle","train_data_y.pickle")
+kfold = StratifiedKFold(n_splits=5, shuffle=True, random_state=seed)
+results = cross_val_score(pipeline, train_data, train_y_data, cv=kfold)
+print("Smaller: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
+
+
+"""
+Train model on the train_data and train_y_data
+"""
+fit_model()
 import glob
+"""
+Test Model on the sampleimages/TestImages/*.jpg
+"""
 ac = ActionClassifier()
 test_file = glob.glob("sample_images/TestImages/*.jpg")
 for test in test_file:
