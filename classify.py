@@ -175,8 +175,8 @@ class ActionClassifier:
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('cross_val', default = "false",help="CrossValidate")
-    parser.add_argument('fit', default = "false", help="Fit Train Data")
+    parser.add_argument('--cross_val', default = "false",help="CrossValidate")
+    parser.add_argument('--fit', default = "false", help="Fit Train Data")
     args = parser.parse_args()
 
 
