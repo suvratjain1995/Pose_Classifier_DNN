@@ -138,12 +138,12 @@ class ActionClassifier:
         # train_ = np.ndarray(train_)
         train_ = np.asarray(train_)
         train_ = np.squeeze(train_,axis= 1)
-        return train_
+        return canvas,train_
                     
 
 
     def classify(self,image):
-        train_ = self.getImageVector(image)
+        canvas,train_ = self.getImageVector(image)
         fight_flag = 0
         notfight_flag = 0
         for i in range(len(train_)):
@@ -157,13 +157,13 @@ class ActionClassifier:
                 notfight_flag+=1
         
         if fight_flag >= 1:
-            temp = np.copy(image)
+            temp = np.copy(canvas)
             font = cv2.FONT_HERSHEY_SIMPLEX
             cv2.putText(temp,'Fight',(20,20), font, 0.5,(255,255,255),2,cv2.LINE_AA)
             print("fight")
             return "fight",temp
         else:
-            temp = np.copy(image)
+            temp = np.copy(canvas)
             font = cv2.FONT_HERSHEY_SIMPLEX
             cv2.putText(temp,'NotFight',(20,20), font, 0.5,(255,255,255),2,cv2.LINE_AA)
             print("notfight")
