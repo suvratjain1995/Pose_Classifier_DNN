@@ -159,13 +159,13 @@ class ActionClassifier:
         if fight_flag >= 1:
             temp = np.copy(image)
             font = cv2.FONT_HERSHEY_SIMPLEX
-            cv2.putText(temp,'Fight',(10,10), font, 4,(255,255,255),2,cv2.LINE_AA)
+            cv2.putText(temp,'Fight',(20,20), font, 0.5,(255,255,255),2,cv2.LINE_AA)
             print("fight")
             return "fight",temp
         else:
             temp = np.copy(image)
             font = cv2.FONT_HERSHEY_SIMPLEX
-            cv2.putText(temp,'NotFight',(10,10), font, 0.5,(255,255,255),2,cv2.LINE_AA)
+            cv2.putText(temp,'NotFight',(20,20), font, 0.5,(255,255,255),2,cv2.LINE_AA)
             print("notfight")
             return "notfight",temp
 
