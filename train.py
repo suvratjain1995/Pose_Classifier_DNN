@@ -114,11 +114,11 @@ if __name__ == "__main__":
     notfight_path = "sample_images/notfight"
     fight_pickle = "fight.pickle"
     notfight_pickle = "notfight.pickle"
-    # get_training_data_(fight_path,params,model_params,fight_pickle)
+    get_training_data_(fight_path,params,model_params,fight_pickle)
     # get_images(None)
     image_person = train_data_measurement(fight_pickle)
     fight_train  = postprocess_train_data(image_person)
-    # get_training_data_(notfight_path,params,model_params,notfight_pickle,notfight_flag = True)
+    get_training_data_(notfight_path,params,model_params,notfight_pickle,notfight_flag = True)
     image_person = train_data_measurement(notfight_pickle)
     notfight_train = postprocess_train_data(image_person)
     train_data = np.concatenate((fight_train,notfight_train),axis = 0)
