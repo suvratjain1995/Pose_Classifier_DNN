@@ -199,7 +199,7 @@ if __name__ == "__main__":
     """
     Train model on the train_data and train_y_data
     """
-    if args.fit_model == "true":
+    if args.fit == "true":
         fit_model()
     import glob
     """
