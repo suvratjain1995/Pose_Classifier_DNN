@@ -197,4 +197,5 @@ test_file = glob.glob("sample_images/TestImages/*.jpg")
 for test in test_file:
     test1 = cv2.imread(test)
     result,result_image = ac.classify(test1)
-    cv2.imwrite("result_"+test,result_image)
+    file_name = test.split("/")[2]
+    cv2.imwrite("result_"+file_name,result_image)
