@@ -27,10 +27,11 @@ def get_training_data_(dir_path,params,model_params,output_pickle_file,notfight_
         os.mkdir("output_images")
 
     files = glob.glob(dir_path+"/*.jpg")
-    
+    # print()
     count = 0
     train_data = []
     for f in files:
+        print(f)
         train_image = cv2.imread(f)
         # print(os.path.join(dir_path,f))
         h,w,_= train_image.shape
@@ -132,7 +133,7 @@ if __name__ == "__main__":
     notfight_path = "sample_images/notfight"
     fight_pickle = "fight.pickle"
     notfight_pickle = "notfight.pickle"
-    # get_training_data_(fight_path,params,model_params,fight_pickle)
+    get_training_data_(fight_path,params,model_params,fight_pickle)
     # get_images(None)
     image_person = train_data_measurement(fight_pickle)
     fight_train  = postprocess_train_data(image_person)
