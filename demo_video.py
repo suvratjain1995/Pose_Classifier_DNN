@@ -8,7 +8,7 @@ import numpy as np
 import util
 from config_reader import config_reader
 from scipy.ndimage.filters import gaussian_filter
-
+from classify import ActionClassifier
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
 from model.cmu_model import get_testing_model
@@ -286,7 +286,7 @@ if __name__ == '__main__':
     output_fps = input_fps / frame_rate_ratio
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
     out = cv2.VideoWriter(video_output,fourcc, output_fps, (input_image.shape[1], input_image.shape[0]))
-
+    # ac = ActionClassifier()
     i = 0 # default is 0
     while(cam.isOpened()) and ret_val == True and i < ending_frame:
         if i%frame_rate_ratio == 0:
