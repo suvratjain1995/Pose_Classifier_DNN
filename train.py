@@ -13,7 +13,7 @@ def normalize_cord(image,X,Y):
   y = [Y[0]/h,Y[1]/h]
   return x,y
 
-def get_training_data_(dir_path,params,model_params,output_pickle_file):
+def get_training_data_(dir_path,params,model_params,output_pickle_file,notfight_flag = False):
     if not os.path.exists("./output_images"):
         os.mkdir("output_images")
 
@@ -26,7 +26,10 @@ def get_training_data_(dir_path,params,model_params,output_pickle_file):
         # print(os.path.join(dir_path,f))
         h,w,_= train_image.shape
         canvas,subset,candidate = process(f,params,model_params,series = True)
-        cv2.imwrite("output_images/output_"+f.split("/")[2],canvas)
+        if not notfight_flag:
+            cv2.imwrite("output_images/output_"+f.split("/")[1],canvas)
+        else:
+            cv2.imwrite("output_images/output_"+f.split("/")[2],canvas)
         temp_tup = (f,(subset,candidate))
         train_data.append(temp_tup)
         with open(output_pickle_file,"wb") as f:
@@ -115,7 +118,7 @@ if __name__ == "__main__":
     # get_images(None)
     image_person = train_data_measurement(fight_pickle)
     fight_train  = postprocess_train_data(image_person)
-    get_training_data_(notfight_path,params,model_params,notfight_pickle)
+    get_training_data_(notfight_path,params,model_params,notfight_pickle,notfight_flag = True)
     image_person = train_data_measurement(notfight_pickle)
     notfight_train = postprocess_train_data(image_person)
     train_data = np.concatenate((fight_train,notfight_train),axis = 0)
