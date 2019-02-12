@@ -7,12 +7,21 @@ import cv2
 import pickle
 import glob
 import numpy as np
+
+"""
+Normalize the image coordinates depending upon the image size
+"""
 def normalize_cord(image,X,Y):
   h,w,_  = image.shape
   x = [X[0]/w,X[1]/w]
   y = [Y[0]/h,Y[1]/h]
   return x,y
 
+
+"""
+Run Pose Estimation Model on all the images and return a pickle file containing the coordinates of the pose on persons on the images 
+
+"""
 def get_training_data_(dir_path,params,model_params,output_pickle_file,notfight_flag = False):
     if not os.path.exists("./output_images"):
         os.mkdir("output_images")
@@ -52,6 +61,11 @@ def get_training_data_(dir_path,params,model_params,output_pickle_file,notfight_
 limbSeq = [[2, 3], [2, 6], [3, 4], [4, 5], [6, 7], [7, 8], [2, 9], [9, 10], \
            [10, 11], [2, 12], [12, 13], [13, 14], [2, 1], [1, 15], [15, 17], \
            [1, 16], [16, 18], [3, 17], [6, 18]]
+           
+           
+"""
+Using the cordinates, get the points per person and return data of human that are most visible in the image
+"""
 def train_data_measurement(train_data_pickle_path):
     with open(train_data_pickle_path,"rb") as f:
         test = pickle.load(f)
@@ -84,7 +98,11 @@ def train_data_measurement(train_data_pickle_path):
           image_person.append((t[0],person_points))
     return image_person
 
+"""
+Convert Raw Point data to numpy arry of training data of size (136). Pose of two people in the image are appended to great one vector.
+returns Array of training data 
 
+"""
 def postprocess_train_data(image_person):
     train_ = []
     for j in range(len(image_person)):
